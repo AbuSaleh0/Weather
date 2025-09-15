@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <meta name="description" content="Get current weather and 3-day forecast for any city">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://api.weatherapi.com">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+</head>
+<body>
+    <div class="app" id="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>Weather App</h1>
+            <div class="controls">
+                <button class="settings-btn" id="settingsBtn" aria-label="Open settings">⚙️</button>
+                <button class="temp-toggle" id="tempToggle" aria-label="Toggle temperature unit">°C</button>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Search for a city..."
+                    aria-label="Search for a city"
+                    autocomplete="off"
+                >
+                <button class="location-btn" id="locationBtn" aria-label="Use my location">📍</button>
+            </div>
+            <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="City suggestions"></div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div class="loading" id="loading" aria-hidden="true">
+            <div class="spinner"></div>
+            <p>Loading weather data...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error" id="error" role="alert" aria-hidden="true">
+            <p id="errorMessage"></p>
+            <button class="retry-btn" id="retryBtn">Try Again</button>
+        </div>
+
+        <!-- Weather Content -->
+        <main class="weather-content" id="weatherContent" aria-hidden="true">
+            <!-- Current Weather Card -->
+            <section class="current-weather" aria-labelledby="current-title">
+                <h2 id="current-title" class="sr-only">Current Weather</h2>
+                <div class="current-header">
+                    <div class="location-info">
+                        <h3 id="locationName">City Name</h3>
+                        <p id="currentTime">Local Time</p>
+                    </div>
+                    <button class="share-btn" id="shareBtn" aria-label="Share weather">📤</button>
+                </div>
+                
+                <div class="current-main">
+                    <div class="temp-display">
+                        <img id="weatherIcon" src="" alt="" class="weather-icon">
+                        <div class="temp-info">
+                            <span class="temperature" id="temperature">--°</span>
+                            <span class="condition" id="condition">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <span class="label">Feels like</span>
+                            <span id="feelsLike">--°</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Humidity</span>
+                            <span id="humidity">--%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Wind</span>
+                            <span id="wind">-- km/h</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Pressure</span>
+                            <span id="pressure">-- mb</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Visibility</span>
+                            <span id="visibility">-- km</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">UV Index</span>
+                            <span id="uvIndex">--</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sun-times">
+                    <div class="sun-time">
+                        <span class="sun-label">🌅 Sunrise</span>
+                        <span id="sunrise">--:--</span>
+                    </div>
+                    <div class="sun-time">
+                        <span class="sun-label">🌇 Sunset</span>
+                        <span id="sunset">--:--</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hourly Chart -->
+            <section class="hourly-section" aria-labelledby="hourly-title">
+                <div class="section-header">
+                    <h3 id="hourly-title">24-Hour Forecast</h3>
+                    <button class="toggle-chart" id="toggleChart" aria-expanded="true">📊</button>
+                </div>
+                <div class="chart-container" id="chartContainer">
+                    <canvas id="hourlyChart" width="800" height="200" aria-label="24-hour temperature chart"></canvas>
+                </div>
+            </section>
+
+            <!-- 3-Day Forecast -->
+            <section class="forecast-section" aria-labelledby="forecast-title">
+                <h3 id="forecast-title">3-Day Forecast</h3>
+                <div class="forecast-container" id="forecastContainer">
+                    <!-- Forecast items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Last Updated -->
+            <div class="last-updated">
+                <small id="lastUpdated">Last updated: --</small>
+            </div>
+        </main>
+
+        <!-- Settings Modal -->
+        <div class="modal" id="settingsModal" aria-hidden="true" role="dialog" aria-labelledby="settings-title">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="settings-title">Settings</h3>
+                    <button class="close-btn" id="closeSettings" aria-label="Close settings">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-item">
+                        <label for="themeSelect">Theme</label>
+                        <select id="themeSelect">
+                            <option value="auto">Auto</option>
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="chartToggle">Show Hourly Chart</label>
+                        <input type="checkbox" id="chartToggle" checked>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

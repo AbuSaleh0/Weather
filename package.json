@@ -1,0 +1,44 @@
+{
+  "name": "weather-web-app",
+  "version": "1.0.0",
+  "description": "A complete, accessible, responsive weather web app built with vanilla HTML, CSS, and JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000 || python3 -m http.server 8000 || npx serve .",
+    "test": "node test.js",
+    "dev": "npx live-server --port=8000 --open=/",
+    "build": "echo 'No build process required for vanilla HTML/CSS/JS'",
+    "deploy": "echo 'Ready for static hosting deployment'"
+  },
+  "keywords": [
+    "weather",
+    "web-app",
+    "vanilla-js",
+    "responsive",
+    "accessible",
+    "pwa-ready"
+  ],
+  "author": "Weather App Developer",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/weather-web-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/weather-web-app/issues"
+  },
+  "homepage": "https://yourusername.github.io/weather-web-app",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}

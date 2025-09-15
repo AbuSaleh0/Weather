@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App Tests</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-output {
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        .run-tests {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .run-tests:hover {
+            background: #1d4ed8;
+        }
+        
+        .test-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .test-info h3 {
+            margin-top: 0;
+            color: #2563eb;
+        }
+        
+        .test-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .test-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .test-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .test-list li::before {
+            content: '🧪 ';
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌤️ Weather App Test Suite</h1>
+        <p>Unit tests for weather data parsing and UI model validation</p>
+        <button class="run-tests" onclick="runTests()">Run Tests</button>
+    </div>
+    
+    <div class="test-info">
+        <h3>Test Coverage</h3>
+        <ul class="test-list">
+            <li>Temperature formatting (Celsius & Fahrenheit)</li>
+            <li>Weather condition text parsing</li>
+            <li>Location data parsing</li>
+            <li>Forecast data structure validation</li>
+            <li>Hourly data structure validation</li>
+            <li>Weather theme determination</li>
+            <li>Date formatting for forecast</li>
+            <li>Wind data formatting</li>
+            <li>UV index validation</li>
+            <li>Humidity percentage validation</li>
+            <li>API URL construction</li>
+            <li>Local storage keys validation</li>
+            <li>Temperature unit conversion logic</li>
+            <li>Error message handling</li>
+        </ul>
+    </div>
+    
+    <div id="testOutput" class="test-output">
+        Click "Run Tests" to execute the test suite...
+    </div>
+    
+    <div class="test-info">
+        <h3>How to Run Tests</h3>
+        <p>Tests can be run in multiple ways:</p>
+        <ul>
+            <li><strong>Browser:</strong> Click the "Run Tests" button above</li>
+            <li><strong>Console:</strong> Open browser dev tools and check console output</li>
+            <li><strong>Automated:</strong> Tests run automatically when this page loads</li>
+        </ul>
+        
+        <h3>Test Framework</h3>
+        <p>Uses a simple custom test framework with the following assertions:</p>
+        <ul>
+            <li><code>assertEqual(actual, expected, message)</code></li>
+            <li><code>assertTrue(condition, message)</code></li>
+            <li><code>assertFalse(condition, message)</code></li>
+        </ul>
+    </div>
+
+    <script src="test.js"></script>
+    <script>
+        // Capture console output for display
+        const originalLog = console.log;
+        let testOutput = '';
+        
+        console.log = function(...args) {
+            const message = args.join(' ');
+            testOutput += message + '\n';
+            originalLog.apply(console, args);
+            
+            // Update display
+            const outputElement = document.getElementById('testOutput');
+            if (outputElement) {
+                outputElement.textContent = testOutput;
+            }
+        };
+        
+        function runTests() {
+            testOutput = '';
+            document.getElementById('testOutput').textContent = 'Running tests...\n';
+            
+            // Clear previous results and run tests
+            setTimeout(() => {
+                if (typeof testSuite !== 'undefined') {
+                    testSuite.run();
+                } else {
+                    console.log('❌ Test suite not loaded');
+                }
+            }, 100);
+        }
+        
+        // Auto-run tests when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(runTests, 500);
+        });
+    </script>
+</body>
+</html>

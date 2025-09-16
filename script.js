@@ -55,7 +55,7 @@ class WeatherApp {
         
         // Modal elements
         this.settingsModal = document.getElementById('settingsModal');
-        this.closeSettings = document.getElementById('closeSettings');
+        this.closeSettingsBtn = document.getElementById('closeSettings');
         this.themeSelect = document.getElementById('themeSelect');
         this.chartToggle = document.getElementById('chartToggle');
     }
@@ -74,9 +74,9 @@ class WeatherApp {
         this.retryBtn.addEventListener('click', () => this.retryLastSearch());
         
         // Modal
-        this.closeSettings.addEventListener('click', () => this.closeSettings());
+        this.closeSettingsBtn.addEventListener('click', () => this.closeSettingsModal());
         this.settingsModal.addEventListener('click', (e) => {
-            if (e.target === this.settingsModal) this.closeSettings();
+            if (e.target === this.settingsModal) this.closeSettingsModal();
         });
         
         // Settings
@@ -87,7 +87,7 @@ class WeatherApp {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.hideSuggestions();
-                this.closeSettings();
+                this.closeSettingsModal();
             }
         });
     }
@@ -475,10 +475,10 @@ class WeatherApp {
     openSettings() {
         this.settingsModal.classList.add('show');
         this.settingsModal.setAttribute('aria-hidden', 'false');
-        this.closeSettings.focus();
+        this.closeSettingsBtn.focus();
     }
 
-    closeSettings() {
+    closeSettingsModal() {
         this.settingsModal.classList.remove('show');
         this.settingsModal.setAttribute('aria-hidden', 'true');
         this.settingsBtn.focus();

@@ -1,10 +1,11 @@
 [build]
-  # No build command needed for vanilla HTML/CSS/JS
+  # Build command to inject environment variables
+  command = "node inject-env.js"
   publish = "."
   
 [build.environment]
-  # Set this in Netlify dashboard: Site settings > Environment variables
-  # WEATHER_API_KEY = "your-production-api-key"
+  # Set WEATHER_API_KEY in Netlify dashboard: Site settings > Environment variables
+  NODE_VERSION = "18"
 
 [[headers]]
   for = "/*"
@@ -31,14 +32,9 @@
     Cache-Control = "public, max-age=0, must-revalidate"
 
 # Redirect rules for SPA-like behavior
+# This ensures all routes are handled by index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  conditions = {Role = ["admin"]}
-
-# Custom 404 page
-[[redirects]]
-  from = "/404"
-  to = "/index.html"
-  status = 404
+  force = false

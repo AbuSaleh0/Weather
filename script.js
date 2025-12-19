@@ -1,7 +1,11 @@
 // Weather App JavaScript
-// OpenWeatherMap API Key
-const API_KEY = '5f9059e3d65cc460d4094435af2c8718';
+// OpenWeatherMap API Key - loaded from environment or fallback
+const API_KEY = window.WEATHER_API_KEY || '';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+
+if (!API_KEY) {
+    console.error('API key not found. Please configure WEATHER_API_KEY environment variable.');
+}
 
 class WeatherApp {
     constructor() {

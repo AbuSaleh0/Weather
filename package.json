@@ -7,7 +7,7 @@
     "start": "python -m http.server 8000 || python3 -m http.server 8000 || npx serve .",
     "test": "node test.js",
     "dev": "npx live-server --port=8000 --open=/",
-    "build": "echo 'No build process required for vanilla HTML/CSS/JS'",
+    "build": "node inject-env.js",
     "deploy": "echo 'Ready for static hosting deployment'"
   },
   "keywords": [

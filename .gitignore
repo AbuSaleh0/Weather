@@ -1,3 +1,6 @@
+# API Configuration - DO NOT COMMIT
+config.js
+
 # Environment variables
 .env
 .env.local

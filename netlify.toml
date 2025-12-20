@@ -1,10 +1,8 @@
 [build]
-  # Build command to inject environment variables
   command = "node inject-env.js"
   publish = "."
-  
+
 [build.environment]
-  # Set WEATHER_API_KEY in Netlify dashboard: Site settings > Environment variables
   NODE_VERSION = "18"
 
 [[headers]]

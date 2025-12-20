@@ -1,10 +1,10 @@
 // Weather App JavaScript
-// OpenWeatherMap API Key - loaded from environment or fallback
-const API_KEY = window.WEATHER_API_KEY || '';
+// OpenWeatherMap API Key - loaded from config.js
+const API_KEY = (window.WEATHER_CONFIG && window.WEATHER_CONFIG.API_KEY) || window.WEATHER_API_KEY || '';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 if (!API_KEY) {
-    console.error('API key not found. Please configure WEATHER_API_KEY environment variable.');
+    console.error('⚠️  API key not configured');
 }
 
 class WeatherApp {
@@ -238,7 +238,7 @@ class WeatherApp {
         try {
             // First, geocode the location
             const geoResponse = await fetch(
-                `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(location)}&limit=1&appid=${API_KEY}`
+                `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(location)}&limit=1&appid=${API_KEY}`
             );
             
             if (!geoResponse.ok) {

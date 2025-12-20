@@ -9,14 +9,20 @@
     <link rel="preconnect" href="https://api.openweathermap.org">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563eb">
-    <!-- Load config before main script -->
-    <script>
-        // Fallback if config.js doesn't load
-        window.WEATHER_CONFIG = window.WEATHER_CONFIG || { API_KEY: '' };
-    </script>
-    <script src="config.js" onerror="console.error('Failed to load config.js - using fallback')"></script>
 </head>
 <body>
+    <!-- Load config synchronously before anything else -->
+    <script src="config.js"></script>
+    <script>
+        // Verify config loaded
+        if (!window.WEATHER_CONFIG || !window.WEATHER_CONFIG.API_KEY) {
+            console.error('❌ Config not loaded properly');
+            window.WEATHER_CONFIG = { API_KEY: '' };
+        } else {
+            console.log('✅ Config loaded, API key present');
+        }
+    </script>
+    
     <div class="app" id="app">
         <!-- Header -->
         <header class="header">

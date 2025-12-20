@@ -10,7 +10,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563eb">
     <!-- Load config before main script -->
-    <script src="config.js"></script>
+    <script src="config.js" onerror="console.error('Failed to load config.js')"></script>
 </head>
 <body>
     <div class="app" id="app">
